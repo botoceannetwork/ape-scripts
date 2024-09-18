@@ -1,3 +1,4 @@
+
 async function createApeToken(imageBase64, imageType, chainId, creator, name, symbol, description, telegram, twitter, website) {
   const formData = new FormData();
   const byteCharacters = atob(imageBase64);
@@ -37,3 +38,5 @@ async function createApeToken(imageBase64, imageType, chainId, creator, name, sy
 }
 
 window.createApeToken = createApeToken;
+
+console.log(window.createApeToken);
