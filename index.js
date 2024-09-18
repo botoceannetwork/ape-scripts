@@ -28,9 +28,11 @@ async function createApeToken(imageBase64, imageType, chainId, creator, name, sy
     }
 
     const result = await response.json();
-    console.log('Success:', result);
+    console.log('createApeToken success: ', result);
+    return result;
   } catch (error) {
-    console.error('Error:', error);
+    console.error('createApeToken error:', error);
+    throw new Error(`createApeToken error: ${error}`);
   }
 }
 
