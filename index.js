@@ -29,7 +29,7 @@ async function createApeToken(imageBase64, imageType, chainId, creator, name, sy
 }
 
 function base64ToBlob(base64, contentType = '', sliceSize = 512) {
-  const byteCharacters = atob(base64.split(',')[1]);
+  const byteCharacters = atob(base64);
   const byteArrays = [];
 
   for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
