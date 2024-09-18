@@ -1,3 +1,4 @@
+// This content is hosted at: https://github.com/yadsendew/ape-scripts/blob/main/index.js 
 async function createApeToken(imageBase64, imageType, chainId, creator, name, symbol, description, telegram, twitter, website) {
   const formData = new FormData();
   const blob = base64ToBlob(imageBase64, imageType);
@@ -22,9 +23,10 @@ async function createApeToken(imageBase64, imageType, chainId, creator, name, sy
     }
 
     const result = await response.json();
-    console.log('Success:', result);
+    console.log('createApeToken Success:', result);
+    return result;
   } catch (error) {
-    console.error('Error:', error);
+    console.error('createApeToken Error:', error);
   }
 }
 
