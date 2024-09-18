@@ -1,14 +1,7 @@
-
 async function createApeToken(imageBase64, imageType, chainId, creator, name, symbol, description, telegram, twitter, website) {
   const formData = new FormData();
-  const byteCharacters = atob(imageBase64);
-  const byteNumbers = new Array(byteCharacters.length);
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteNumbers[i] = byteCharacters.charCodeAt(i);
-  }
-  const byteArray = new Uint8Array(byteNumbers);
-  const blob = new Blob([byteArray], { type: imageType });
-  formData.append('files', blob, 'image');
+  const blob = base64ToBlob(imageBase64, imageType);
+  formData.append('files', blob, imageType);
   formData.append('data.Chain', `${chainId}`);
   formData.append('data.Creator', creator);
   formData.append('data.Name', name);
@@ -29,14 +22,29 @@ async function createApeToken(imageBase64, imageType, chainId, creator, name, sy
     }
 
     const result = await response.json();
-    console.log('createApeToken success: ', result);
-    return result;
+    console.log('Success:', result);
   } catch (error) {
-    console.error('createApeToken error:', error);
-    throw new Error(`createApeToken error: ${error}`);
+    console.error('Error:', error);
   }
 }
 
-window.createApeToken = createApeToken;
+function base64ToBlob(base64, contentType = '', sliceSize = 512) {
+  const byteCharacters = atob(base64.split(',')[1]);
+  const byteArrays = [];
 
-console.log(window.createApeToken);
+  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+
+  return new Blob(byteArrays, { type: contentType });
+}
+
+window.createApeToken = createApeToken;
