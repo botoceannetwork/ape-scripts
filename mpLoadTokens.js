@@ -18,10 +18,9 @@ async function mpLoadTokens(url) {
     }
 
     const result = await response.json();
-    console.log('mpLoadTokens Success:', result);
     return result;
   } catch (error) {
-    console.error('mpLoadTokens Error:', error);
+    console.error(`mpLoadTokens error: ${error}`);
   }
 }
 
