@@ -23,10 +23,10 @@ async function mpLoadTokens(pageNumber) {
     }
 
     const result = await response.json();
-    console.log('createApeToken Success:', result);
+    console.log('mpLoadTokens Success:', result);
     return result;
   } catch (error) {
-    console.error('createApeToken Error:', error);
+    console.error('mpLoadTokens Error:', error);
   }
 }
 
